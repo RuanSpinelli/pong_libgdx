@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.game.screens.GameScreen;
 
 
@@ -18,6 +20,7 @@ public class Main extends Game {
 	public static Main INSTANCE;
 	private int screenWidth, screenHeight;
 	private OrthographicCamera camera;
+	private ExtendViewport viewPort;
 	
 	
 	
@@ -25,15 +28,33 @@ public class Main extends Game {
 		INSTANCE = this;
 	}
 
-    @Override
-    public void create() {
-    	this.screenHeight = Gdx.graphics.getWidth();
-    	this.screenWidth = Gdx.graphics.getHeight();
-    	this.camera = new OrthographicCamera();
-    	this.camera.setToOrtho(false, screenWidth, screenHeight);
-    	
-    	
-    	setScreen(new GameScreen(camera)); //Define uma tela que vai rodar quando o jogo inicializar
+	@Override
+	public void create() {
+
+	    this.screenWidth = 800;
+	    this.screenHeight = 600;
+
+	    this.camera = new OrthographicCamera();
+
+	    this.viewPort = new ExtendViewport(
+	        screenWidth,
+	        screenHeight,
+	        camera
+	    );
+
+	    // IMPORTANTE: calcula o worldWidth/worldHeight reais
+	    // antes de criar Ball e Player
+	    this.viewPort.update(
+	        Gdx.graphics.getWidth(),
+	        Gdx.graphics.getHeight(),
+	        true
+	    );
+
+	    setScreen(new GameScreen(camera));
+	}
+    
+    public ExtendViewport getViewPort() {
+        return viewPort;
     }
 
 	public int getScreenWidth() {
