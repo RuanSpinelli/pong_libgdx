@@ -33,6 +33,16 @@ public class Ball {
 	}
 	
 	
+	public float getY() {
+		return y;
+	}
+
+
+	public void setY(float y) {
+		this.y = y;
+	}
+
+
 	private float getRandomDirection() {
 		return (Math.random() < 0.5) ? 1: -1;
 	}
@@ -44,6 +54,29 @@ public class Ball {
 		this.body.setLinearVelocity(velX * speed, velY * speed);
 		
 		// score
+		
+		if (x < 0 ) {
+			gameScreen.getPlayerAi().score();
+			reset();
+		} else if (x > Main.INSTANCE.getScreenWidth()) {
+			gameScreen.getPlayer().score();
+			reset();
+		}
+		
+	}
+
+	public void reverseVelX(){
+		this.velX *= -1;
+	}
+	
+	
+	public void incSpeed() {
+		this.speed *= 1.1f;
+	}
+	
+	
+	public void reverseVelY() {
+		this.velY *= -1;
 	}
 	
 	

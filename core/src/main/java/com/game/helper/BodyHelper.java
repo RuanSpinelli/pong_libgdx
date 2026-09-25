@@ -15,6 +15,7 @@ public class BodyHelper {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = isStatic == false ? bodyDef.type.DynamicBody: BodyDef.BodyType.StaticBody;
 		bodyDef.position.set(x / Const.PPM, y / Const.PPM);
+		bodyDef.fixedRotation = true;
 		Body body = world.createBody(bodyDef);
 		
 		PolygonShape shape = new PolygonShape();
