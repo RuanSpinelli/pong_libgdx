@@ -42,4 +42,7 @@ public abstract class PlayerPaddle {
 		
 	}
 	
+	public void score() {
+		this.score ++;
+	}
 }
