@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.game.screens.GameScreen;
 
@@ -20,7 +21,7 @@ public class Main extends Game {
 	public static Main INSTANCE;
 	private int screenWidth, screenHeight;
 	private OrthographicCamera camera;
-	private ExtendViewport viewPort;
+	private FitViewport viewPort;
 	
 	
 	
@@ -33,14 +34,13 @@ public class Main extends Game {
 
 	    this.screenWidth = 800;
 	    this.screenHeight = 600;
+	    //this.screenWidth = 1920;
+	    //this.screenHeight = 1080;
 
+		
 	    this.camera = new OrthographicCamera();
 
-	    this.viewPort = new ExtendViewport(
-	        screenWidth,
-	        screenHeight,
-	        camera
-	    );
+	    this.viewPort = new FitViewport(screenWidth, screenHeight, camera); // ← FitViewport
 
 	    // IMPORTANTE: calcula o worldWidth/worldHeight reais
 	    // antes de criar Ball e Player
@@ -53,7 +53,7 @@ public class Main extends Game {
 	    setScreen(new GameScreen(camera));
 	}
     
-    public ExtendViewport getViewPort() {
+    public FitViewport getViewPort() {
         return viewPort;
     }
 

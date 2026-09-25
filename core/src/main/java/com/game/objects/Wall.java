@@ -26,8 +26,7 @@ public class Wall {
         this.y = y;
 
         this.height = 32;
-        // usa a largura real do mundo da viewport
-        this.width = Main.INSTANCE.getViewPort().getWorldWidth();
+        this.width = Main.INSTANCE.getScreenWidth(); // ← pode voltar a usar isso!
         this.x = width / 2f;
 
         this.texture = new Texture("white_square.png");
@@ -39,7 +38,8 @@ public class Wall {
     }
 
     /** Recalcula tamanho/posição quando a tela muda */
-    public void resize() {
+    
+    /*public void resize() {
         this.width = Main.INSTANCE.getViewPort().getWorldWidth();
         this.x = width / 2f;
 
@@ -54,7 +54,7 @@ public class Wall {
             x, y, width, height, true, 0,
             gameScreen.getWorld(), ContentType.WALL
         );
-    }
+    }*/
 
     public void render(SpriteBatch batch) {
         batch.draw(texture, x - width / 2f, y - height / 2f, width, height);
