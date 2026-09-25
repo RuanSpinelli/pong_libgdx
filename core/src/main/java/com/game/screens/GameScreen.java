@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.game.Main;
 import com.game.objects.Ball;
 import com.game.objects.Player;
+import com.game.objects.PlayerAI;
 import com.game.objects.Wall;
 
 public class GameScreen extends ScreenAdapter {
@@ -23,6 +24,7 @@ public class GameScreen extends ScreenAdapter {
 	
 	// Game objects
 	private Player player;
+	private PlayerAI playerAi;
 	private Ball ball;
 	private Wall wallTop, wallBottom;
 	
@@ -38,6 +40,8 @@ public class GameScreen extends ScreenAdapter {
 
         // usa worldH em vez do screenHeight fixo
         player = new Player(16, worldH / 2, this);
+        playerAi = new PlayerAI(Main.INSTANCE.getViewPort().getWorldWidth() - 16, worldH / 2,this);
+         
         ball = new Ball(this);
 
         // paredes
@@ -52,6 +56,7 @@ public class GameScreen extends ScreenAdapter {
     	batch.setProjectionMatrix(camera.combined);
     	
     	this.player.update();
+    	this.playerAi.update();
     	this.ball.update();
     	
     	if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
@@ -63,7 +68,21 @@ public class GameScreen extends ScreenAdapter {
     	}
     }
     
-    @Override
+    
+    
+    public Player getPlayer() {
+		return player;
+	}
+
+
+
+	public PlayerAI getPlayerAi() {
+		return playerAi;
+	}
+
+
+
+	@Override
     public void render(float delta) {
     	update();
     	
@@ -74,6 +93,7 @@ public class GameScreen extends ScreenAdapter {
 
         batch.begin();
     		player.render(batch);
+    		playerAi.render(batch);
     		ball.render(batch);
     		wallBottom.render(batch);
     		wallTop.render(batch);
@@ -94,6 +114,11 @@ public class GameScreen extends ScreenAdapter {
 		return world;
 	}
 
+    
+    public Ball getBall() {
+    	return this.ball;
+    }
+    
 	public void setWorld(World world) {
 		this.world = world;
 	}
