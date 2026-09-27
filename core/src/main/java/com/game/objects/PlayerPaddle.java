@@ -28,8 +28,15 @@ public abstract class PlayerPaddle {
 				false, 10000, gameScreen.getWorld(), ContentType.PLAYER);
 		
 	}
-
 	
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
 	public void update() {
 		x = body.getPosition().x * Const.PPM - (width / 2);
 		y = body.getPosition().y * Const.PPM - (height / 2);
